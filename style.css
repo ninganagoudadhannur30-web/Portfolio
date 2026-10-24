@@ -111,7 +111,7 @@ strong { font-weight: 700; }
   letter-spacing: -.04em;
   margin-bottom: 32px;
   overflow: hidden;
-  white-space: nowrap;
+  word-break: break-word;
 }
 .h1-line { display: block; animation: slideUp .8s cubic-bezier(.16,1,.3,1) both; }
 @keyframes slideUp {
@@ -455,24 +455,137 @@ section { padding: 100px 56px; }
 .fi.in { opacity: 1; transform: translateY(0); }
 
 /* ===== RESPONSIVE ===== */
+
+/* Tablet */
 @media (max-width: 1080px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .id-card { max-width: 420px; }
-  .pcard { grid-template-columns: 1fr; }
-  .pcard-right { flex-direction: row; flex-wrap: wrap; }
-  .pcard-metric { flex: 1; }
+  #nav { padding: 18px 32px; }
+  .hero { padding: 100px 32px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .id-card { max-width: 100%; }
+  section { padding: 80px 32px; }
+  .pcard { grid-template-columns: 1fr; gap: 28px; }
+  .pcard-right { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+  .pcard-metric { flex: 1; min-width: 160px; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .skills-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer { padding: 24px 32px; }
 }
-@media (max-width: 720px) {
-  #nav { padding: 18px 24px; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  /* disable custom cursor on touch */
+  .cursor { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
+
+  /* nav */
+  #nav { padding: 16px 20px; }
   .nav-links { display: none; }
   .sys-ready { display: none; }
-  section { padding: 70px 24px; }
-  .hero { padding: 100px 24px 70px; }
-  .footer { padding: 24px; flex-direction: column; gap: 8px; }
-  .skills-grid { grid-template-columns: 1fr; }
-  .stats-row { flex-wrap: wrap; width: 100%; }
-  .frow2 { grid-template-columns: 1fr; }
+
+  /* hero */
+  .hero {
+    min-height: 100svh;
+    padding: 90px 20px 56px;
+    align-items: flex-start;
+  }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-eyebrow { font-size: .7rem; margin-bottom: 16px; }
+  .hero-h1 {
+    font-size: clamp(2.6rem, 11vw, 4rem);
+    white-space: normal;
+    letter-spacing: -.03em;
+    margin-bottom: 20px;
+  }
+  .hero-desc { font-size: .9rem; margin-bottom: 28px; max-width: 100%; }
+  .hero-btns { flex-direction: column; gap: 10px; margin-bottom: 36px; }
+  .btn-fill, .btn-outline { width: 100%; text-align: center; padding: 14px 20px; }
+
+  /* stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-radius: 4px;
+  }
+  .stat-sep { display: none; }
+  .stat {
+    padding: 14px 12px;
+    border-right: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+  }
+  .stat:nth-child(4), .stat:nth-child(8) { border-right: none; }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-n { font-size: 1.4rem; }
+  .stat-l { font-size: .6rem; }
+
+  /* id card */
+  .id-card { display: none; } /* hide JSON card on small screens — too dense */
+
+  /* ticker */
+  .ticker-track { font-size: .68rem; gap: 14px; }
+
+  /* sections */
+  section { padding: 60px 20px; }
+
+  /* section header */
+  .sec-hdr { margin-bottom: 36px; gap: 12px; }
+  .sec-hdr h2 { font-size: .9rem; }
+
+  /* project cards */
+  .pcard {
+    grid-template-columns: 1fr;
+    padding: 32px 0;
+    gap: 20px;
+  }
+  .pcard::before { left: -20px; right: -20px; }
+  .pcard-title { font-size: 1.5rem; }
+  .pcard-desc { font-size: .88rem; }
+  .pcard-right { flex-direction: column; gap: 16px; }
+  .pcard-metric { display: grid; grid-template-columns: repeat(3,1fr); }
+  .pcard-arrow { align-self: flex-start; font-size: 1.5rem; }
+  .pcard-tags { gap: 6px; }
+  .pcard-tags span { font-size: .65rem; padding: 4px 8px; }
+
+  /* about */
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-h3 { font-size: 1.3rem; }
+  .about-left p { font-size: .88rem; }
+  .tl { padding-left: 20px; }
+  .tl-marker { left: -27px; }
+  .tl-top strong { font-size: .92rem; }
+  .tl-date { font-size: .64rem; }
+  .tl-body p { font-size: .84rem; }
+
+  /* skills */
+  .skills-grid { grid-template-columns: 1fr; gap: 36px; }
+  .skl-title { font-size: .7rem; }
+  .skl-list li { font-size: .84rem; }
+
+  /* contact */
+  .contact-simple { gap: 0; }
+  .contact-big { font-size: clamp(1.8rem, 8vw, 2.8rem); margin-bottom: 14px; }
+  .contact-sub { font-size: .88rem; margin-bottom: 28px; }
+  .mail-btn {
+    width: 100%;
+    padding: 18px 20px;
+    font-size: .82rem;
+    flex-wrap: nowrap;
+  }
+  .mail-btn span:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .clink { font-size: .82rem; }
+
+  /* footer */
+  .footer {
+    padding: 20px;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    font-size: .68rem;
+  }
 }
